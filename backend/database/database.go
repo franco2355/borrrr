@@ -27,13 +27,13 @@ func ConectarBD() {
 
 	var err error
 
-	for i := 1; i <= 20; i++ {
+	for i := 1; i <= 40; i++ {
 		DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 		if err == nil {
 			break
 		}
-		fmt.Printf("⏳ Esperando conexión con la base de datos (intento %d/20): %s\n", i, err.Error())
-		time.Sleep(3 * time.Second)
+		fmt.Printf("⏳ Esperando conexión con la base de datos (intento %d/40): %s\n", i, err.Error())
+		time.Sleep(5 * time.Second)
 	}
 
 	if err != nil {
