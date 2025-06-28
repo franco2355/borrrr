@@ -87,7 +87,7 @@ const MisActividades = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:8080/misactividades", {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/misactividades`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
