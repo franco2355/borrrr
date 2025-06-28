@@ -15,10 +15,10 @@ services:
   backend-gimnasio:
     build:
       context: ./backend
+    env_file:
+      - .env
     ports:
       - "8080:8080"
-    environment:
-      DB_DSN: "root:clave123@tcp(mysql-gimnasio:3306)/gimnasio?charset=utf8mb4&parseTime=True&loc=Local"
     depends_on:
       - mysql-gimnasio
 
