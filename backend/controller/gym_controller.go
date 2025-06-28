@@ -140,9 +140,10 @@ func ValidateToken(contexto *gin.Context) {
 		return
 	}
 
-	contexto.Set("userID", token.Claims.(*claims).ID)
-	contexto.Set("email", token.Claims.(*claims).Subject) // Capaz innecesario
-	contexto.Next()
+       contexto.Set("userID", token.Claims.(*claims).ID)
+       contexto.Set("email", token.Claims.(*claims).Subject) // Capaz innecesario
+       contexto.Set("isAdmin", token.Claims.(*claims).IsAdmin)
+       contexto.Next()
 }
 
 func GetActividades(contexto *gin.Context) {
