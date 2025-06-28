@@ -32,6 +32,10 @@ docker-compose up --build
 
 El backend quedará disponible en `http://localhost:8080` y el frontend en `http://localhost:3000`.
 
+El código del backend realiza hasta 40 intentos de conexión a la base de datos,
+esperando 5 segundos entre cada uno. Esto permite que MySQL termine de iniciarse
+antes de que el servicio falle.
+
 Para detener los contenedores utilice `docker-compose down`.
 
 ## Pruebas
