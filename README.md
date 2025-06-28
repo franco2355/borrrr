@@ -21,6 +21,7 @@ VITE_BACKEND_URL=http://localhost:8080
 ```
 
 Ajuste los valores de las variables `DB_*` según su entorno en caso de ser necesario.
+El contenedor de MySQL se expone en el puerto 3307 del host (`3307:3306`). Si necesita utilizar otro puerto, cambie el valor antes de los dos puntos en `docker-compose.yml`.
 
 ## Construcción y ejecución con Docker Compose
 
