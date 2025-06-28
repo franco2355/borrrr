@@ -143,7 +143,7 @@ function Actividades() {
       const token = localStorage.getItem("token");
       if (!token) { navigate("/"); return; }
       try {
-        const resp = await fetch("http://localhost:8080/inscripciones", {
+        const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/inscripciones`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!resp.ok) throw new Error();
@@ -171,7 +171,7 @@ function Actividades() {
         if (filtrosAplicados.horario) params.append('horario', filtrosAplicados.horario);
         params.append('page', actualPage.toString());
 
-        const resp = await fetch(`http://localhost:8080/actividades?${params.toString()}`);
+        const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/actividades?${params.toString()}`);
         if (!resp.ok) throw new Error();
 
         const data = await resp.json();

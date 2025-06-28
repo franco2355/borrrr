@@ -15,7 +15,7 @@ const Login = () => {
 
     try {
       const passwordHash = await hashPassword(password);
-      const response = await fetch('http://localhost:8080/login', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password: passwordHash }), // FALTA HASHEAR CONTRASEÑA

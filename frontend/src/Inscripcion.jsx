@@ -7,8 +7,8 @@ const handleInscribir = async (actividadID, alreadyInscribed) => {
     }
 
     const url = alreadyInscribed
-        ? 'http://localhost:8080/unscripcion'
-        : 'http://localhost:8080/inscripcion';
+        ? `${import.meta.env.VITE_BACKEND_URL}/unscripcion`
+        : `${import.meta.env.VITE_BACKEND_URL}/inscripcion`;
 
     try {
         const response = await fetch(url, {
