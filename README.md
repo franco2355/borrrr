@@ -10,7 +10,8 @@ Este repositorio contiene un backend en Go y un frontend en React. Ambos servici
 
 ## Configuración del archivo `.env`
 
-Cree un archivo llamado `.env` en la raíz del repositorio y defina las variables necesarias para que los contenedores puedan comunicarse.
+Copie el archivo `example.env` a `.env` para usar la configuración por defecto.
+Luego modifique las variables según sea necesario para que los contenedores puedan comunicarse.
 
 ```dotenv
 # Cadena de conexión para MySQL utilizada por el backend
