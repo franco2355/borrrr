@@ -28,12 +28,12 @@ El contenedor de MySQL se expone en el puerto 3307 del host (`3307:3306`). Si ne
 Ejecute el siguiente comando para compilar las imágenes y levantar los servicios:
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 El backend quedará disponible en `http://localhost:8080` y el frontend en `http://localhost:3000`.
 
-Para detener los contenedores utilice `docker-compose down`.
+Para detener los contenedores utilice `docker compose down`.
 
 ## Pruebas
 
