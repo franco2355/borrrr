@@ -1,103 +1,132 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { useState } from "react"
+import { Navbar } from "@/components/navbar"
+import { PropertyCard } from "@/components/property-card"
+import { PurchaseModal } from "@/components/purchase-modal"
+import { DetailsModal } from "@/components/details-modal"
+
+// Mock data for properties
+const properties = [
+  {
+    id: 1,
+    name: "Torre Residencial Marina",
+    location: "Puerto Madero, Buenos Aires",
+    image: "/modern-residential-tower-with-glass-facade.png",
+    totalTokens: 10000,
+    availableTokens: 7500,
+    tokenPrice: 150,
+    expectedReturn: "8.5%",
+    description: "Exclusivo desarrollo residencial en el corazón de Puerto Madero con vista al río.",
+    details: {
+      area: "45,000 m²",
+      floors: 32,
+      units: 180,
+      completion: "Q2 2025",
+      developer: "Inmobiliaria Premium SA",
+    },
+  },
+  {
+    id: 2,
+    name: "Complejo Comercial Norte",
+    location: "Palermo, Buenos Aires",
+    image: "/modern-commercial-complex-with-retail-spaces.png",
+    totalTokens: 15000,
+    availableTokens: 12300,
+    tokenPrice: 200,
+    expectedReturn: "9.2%",
+    description: "Centro comercial de última generación en zona premium de Palermo.",
+    details: {
+      area: "28,500 m²",
+      floors: 8,
+      units: 95,
+      completion: "Q4 2024",
+      developer: "Desarrollos Urbanos SRL",
+    },
+  },
+  {
+    id: 3,
+    name: "Edificio Corporativo Central",
+    location: "Microcentro, Buenos Aires",
+    image: "/corporate-office-building-with-modern-architecture.png",
+    totalTokens: 8000,
+    availableTokens: 5200,
+    tokenPrice: 300,
+    expectedReturn: "7.8%",
+    description: "Edificio de oficinas AAA en el distrito financiero de la ciudad.",
+    details: {
+      area: "22,000 m²",
+      floors: 25,
+      units: 120,
+      completion: "Q1 2025",
+      developer: "Corporación Inmobiliaria SA",
+    },
+  },
+  {
+    id: 4,
+    name: "Residencial Jardín Sur",
+    location: "Belgrano, Buenos Aires",
+    image: "/residential-garden-complex-with-green-spaces.png",
+    totalTokens: 12000,
+    availableTokens: 9800,
+    tokenPrice: 120,
+    expectedReturn: "8.1%",
+    description: "Complejo residencial con amplios espacios verdes y amenities de primera.",
+    details: {
+      area: "35,000 m²",
+      floors: 15,
+      units: 200,
+      completion: "Q3 2025",
+      developer: "Verde Inmobiliaria SA",
+    },
+  },
+]
+
+export default function HomePage() {
+  const [selectedProperty, setSelectedProperty] = useState<(typeof properties)[0] | null>(null)
+  const [purchaseModalOpen, setPurchaseModalOpen] = useState(false)
+  const [detailsModalOpen, setDetailsModalOpen] = useState(false)
+
+  const handlePurchaseClick = (property: (typeof properties)[0]) => {
+    setSelectedProperty(property)
+    setPurchaseModalOpen(true)
+  }
+
+  const handleDetailsClick = (property: (typeof properties)[0]) => {
+    setSelectedProperty(property)
+    setDetailsModalOpen(true)
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-background">
+      <Navbar />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      <main className="container mx-auto px-4 py-8">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-foreground mb-4 text-balance">Invierte en Inmuebles con Tokens</h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
+            Accede a inversiones inmobiliarias premium con la flexibilidad de los tokens digitales
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {properties.map((property) => (
+            <PropertyCard
+              key={property.id}
+              property={property}
+              onPurchaseClick={() => handlePurchaseClick(property)}
+              onDetailsClick={() => handleDetailsClick(property)}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          ))}
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      {selectedProperty && (
+        <>
+          <PurchaseModal property={selectedProperty} open={purchaseModalOpen} onOpenChange={setPurchaseModalOpen} />
+          <DetailsModal property={selectedProperty} open={detailsModalOpen} onOpenChange={setDetailsModalOpen} />
+        </>
+      )}
     </div>
-  );
+  )
 }
