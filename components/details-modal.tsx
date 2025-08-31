@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { MapPin, Building, TrendingUp, Coins } from "lucide-react"
+import { MapPin, Building, TrendingUp, Coins } from "@/components/icons"
 import Image from "next/image"
 
 interface Property {
