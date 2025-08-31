@@ -1,7 +1,17 @@
-// Contract addresses - these would be replaced with actual deployed addresses
+// Contract addresses are provided through environment variables so the
+// frontend can target the correct deployed instances.
+// They are exposed as NEXT_PUBLIC_* to ensure they are available in the
+// browser at build time.
+const assetTokenAddress =
+  (process.env.NEXT_PUBLIC_ASSET_TOKEN_ADDRESS as `0x${string}` | undefined) ??
+  ("0x0000000000000000000000000000000000000000" as `0x${string}`)
+const stakingAdapterAddress =
+  (process.env.NEXT_PUBLIC_STAKING_ADAPTER_ADDRESS as `0x${string}` | undefined) ??
+  ("0x0000000000000000000000000000000000000000" as `0x${string}`)
+
 export const CONTRACTS = {
   AssetToken: {
-    address: "0x1234567890123456789012345678901234567890" as `0x${string}`,
+    address: assetTokenAddress,
     abi: [
       {
         inputs: [{ name: "account", type: "address" }],
@@ -33,7 +43,7 @@ export const CONTRACTS = {
     ] as const,
   },
   StakingAdapter: {
-    address: "0x2345678901234567890123456789012345678901" as `0x${string}`,
+    address: stakingAdapterAddress,
     abi: [
       {
         inputs: [{ name: "amount", type: "uint256" }],
